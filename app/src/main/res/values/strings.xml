@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="action_settings">Settings</string>
+    <string name="long_app_name">Ultimate Tic Tac Toe</string>
+    <string name="continue_label">Continue</string>
+    <string name="new_game_label">New Game</string>
+    <string name="about_label">About</string>
+    <string name="ok_label">OK</string>
+    <string name="about_title">About Ultimate Tic Tac Toe</string>
+    <string name="about_text">
+    This game is played jus like regular Tic Tac Toe</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="declare_winner">%1$s is the winner</string>
+
+</resources>

@@ -1,0 +1,128 @@
+Index: app/src/main/java/org/example/tictactoe/GameActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/org/example/tictactoe/GameActivity.java	(date 1456098125000)
++++ app/src/main/java/org/example/tictactoe/GameActivity.java	(date 1456091396000)
+@@ -1,12 +1,7 @@
+ package org.example.tictactoe;
+ 
+-import android.app.AlertDialog;
+-import android.app.Dialog;
+ import android.app.Fragment;
+-import android.app.FragmentTransaction;
+-import android.content.DialogInterface;
+ import android.os.Bundle;
+-import android.support.v4.app.FragmentManager;
+ import android.support.v7.app.AppCompatActivity;
+ import android.util.Log;
+ 
+@@ -14,40 +9,15 @@
+ 
+     public static final String KEY_RESTORE = "key_restore";
+     public static final String PREF_RESTORE = "pref_restore";
+-    private GameActivityFragment mGameFragment ;
++    private Fragment mGameFragment;
+ 
+-    public void restartGame() {
+-        mGameFragment.restartGame();
+-    }
+-
+-    public void reportWinner(final Tile.Owner winner)
+-    {
+-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+-        builder.setMessage(getString(R.string.declare_winner, winner));
+-        builder.setCancelable(false);
+-        builder.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
+-            @Override
++    @Override
+-            public void onClick(DialogInterface dialog, int which) {
+-                finish();
+-            }
+-        });
+-
+-        final Dialog dialog = builder.create();
+-        dialog.show();
+-
+-        //Reset the board to the initial position
+-        mGameFragment.initialGame();
+-
+-    }
+-
+-    @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_game);
+ 
+         //Restore game here...
+-        FragmentManager fm = getSupportFragmentManager();
+-        mGameFragment = (GameActivityFragment) fm.findFragmentById(R.id.fragment_game);
++        mGameFragment = getFragmentManager().findFragmentById(R.id.fragment_game);
+         boolean restore = getIntent().getBooleanExtra(KEY_RESTORE, false);
+         if (restore) {
+             String gameData = getPreferences(MODE_PRIVATE).getString(PREF_RESTORE, null);
+@@ -68,6 +38,7 @@
+         Log.d("UT3", "state = " + gameData);
+     }
+ 
+-
+-
++    public void restartGame() {
++        mGameFragment.restartGame();
++    }
+ }
+Index: app/src/main/java/org/example/tictactoe/GameActivityFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/org/example/tictactoe/GameActivityFragment.java	(date 1456098125000)
++++ app/src/main/java/org/example/tictactoe/GameActivityFragment.java	(date 1456098125000)
+@@ -1,46 +0,0 @@
+-package org.example.tictactoe;
+-
+-import android.os.Bundle;
+-import android.support.v4.app.Fragment;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-
+-/**
+- * A placeholder fragment containing a simple view.
+- */
+-public class GameActivityFragment extends Fragment {
+-
+-    public GameActivityFragment() {
+-    }
+-
+-    public void putState(String gameData) {
+-    }
+-
+-    public String setState() {
+-    }
+-
+-    public void initialGame() {
+-    }
+-
+-    public void restartGame() {
+-    }
+-    @Override
+-    public void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setRetainInstance(true);
+-
+-    }
+-
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-        return inflater.inflate(R.layout.fragment_game, container, false);
+-    }
+-
+-
+-
+-}
+-
+-
+-
